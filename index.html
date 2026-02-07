@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MarketMind – GenAI Sales & Marketing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family:'Inter',sans-serif;
+      background:#3b2a1f; /* dark brown background */
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .container {
+      width:100%;
+      max-width:1100px;
+    }
+
+    .header h2 {
+      font-size:30px;
+      margin-bottom:6px;
+    }
+
+    .header p {
+      opacity:0.8;
+      margin-bottom:30px;
+      color:#f5efe6;
+    }
+
+    .main {
+      display:grid;
+      grid-template-columns:1.3fr 1fr;
+      gap:40px;
+    }
+
+    /* LEFT SECTION */
+    .left h1 {
+      font-size:46px;
+      margin-bottom:14px;
+      color:#fff;
+    }
+
+    .left p {
+      opacity:0.85;
+      color:#f5efe6;
+      max-width:420px;
+    }
+
+    /* RIGHT CARD */
+    .card {
+      background:#5a3b2b; /* brown card */
+      padding:28px;
+      border-radius:24px;
+      box-shadow:0 25px 60px rgba(0,0,0,0.35);
+    }
+
+    .card h3 {
+      margin-bottom:18px;
+      font-size:20px;
+      color:#fff;
+    }
+
+    select,
+    input,
+    textarea {
+      width:100%;
+      padding:14px;
+      margin-bottom:14px;
+      border-radius:14px;
+      border:1px solid #d6c7b8;
+      background:#fff7ed; /* cream inputs */
+      color:#000;
+      font-size:14px;
+      outline:none;
+    }
+
+    textarea {
+      resize:none;
+      height:90px;
+    }
+
+    /* FILE UPLOAD (CUSTOM) */
+    .file-label {
+      display:block;
+      padding:14px;
+      margin-bottom:14px;
+      border-radius:14px;
+      background:#fff7ed;
+      color:#3b2a1f;
+      font-weight:600;
+      text-align:center;
+      cursor:pointer;
+      border:2px dashed #d6c7b8;
+      transition:0.2s;
+    }
+
+    .file-label:hover {
+      background:#f3eadf;
+    }
+
+    .file-label input {
+      display:none;
+    }
+
+    .btn {
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:#fff;
+      color:#3b2a1f;
+      font-weight:800;
+      font-size:15px;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .btn:hover {
+      transform:translateY(-2px);
+      box-shadow:0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    /* OUTPUT */
+    .result {
+      margin-top:40px;
+      background:#fff7ed;
+      color:#000;
+      padding:24px;
+      border-radius:24px;
+      white-space:pre-wrap;
+      box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    }
+
+    @media(max-width:900px){
+      .main{ grid-template-columns:1fr; }
+      .left h1{ font-size:36px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h2>MarketMind – GenAI Sales & Marketing Platform</h2>
+    <p>Your AI Marketing Command Center</p>
+  </div>
+
+  <div class="main">
+
+    <!-- LEFT -->
+    <div class="left">
+      <h1>Make Your Marketing Strategy Instantly</h1>
+      <p>
+        Generate campaigns, ad copy, social content, SWOT analysis,
+        email marketing and more — powered by AI.
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <h3>Generate Strategy</h3>
+
+      <form action="/generate" method="post" enctype="multipart/form-data">
+
+        <select name="mode" required>
+          <option value="campaign">Full Campaign Strategy</option>
+          <option value="social">Social Media Content</option>
+          <option value="ads">Ad Copy</option>
+          <option value="email">Email Marketing</option>
+          <option value="sales">Sales Pitch</option>
+          <option value="positioning">Product Positioning</option>
+          <option value="swot">SWOT Analysis</option>
+          <option value="calendar">30-Day Content Calendar</option>
+          <option value="persona">Target Persona Generator</option>
+        </select>
+
+        <select name="tone">
+          <option value="professional">Professional</option>
+          <option value="genz">Gen Z</option>
+          <option value="corporate">Corporate</option>
+          <option value="luxury">Luxury</option>
+          <option value="emotional">Emotional</option>
+          <option value="aggressive">Aggressive Sales</option>
+        </select>
+
+        <textarea name="product" placeholder="Product details" required></textarea>
+
+        <textarea name="audience" placeholder="Target audience (optional)"></textarea>
+
+        <input name="platform" placeholder="Platform (Instagram, LinkedIn, etc)">
+
+        <!-- CUSTOM FILE INPUTS -->
+        <label class="file-label">
+          Upload Product Image (optional)
+          <input type="file" name="image" accept="image/*">
+        </label>
+
+        <label class="file-label">
+          Upload Product Video (optional)
+          <input type="file" name="video" accept="video/*">
+        </label>
+
+        <button class="btn" type="submit">Generate</button>
+      </form>
+    </div>
+
+  </div>
+
+  {% if result %}
+  <div class="result">
+    <h3>AI Generated Output</h3>
+    {{ result }}
+  </div>
+  {% endif %}
+
+</div>
+
+</body>
+</html>
